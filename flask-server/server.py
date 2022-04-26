@@ -1,11 +1,17 @@
 from flask import Flask
 
+
 app = Flask(__name__)
 
 # Members API Route
 @app.route("/members")
 def members():
     return {"members": ["Member1", "Member2", "Member3"]}
+
+# # Model Output
+# @app.route("/prediction")
+# def prediction():
+#     return{}
 
 
 if __name__ == "__main__":
