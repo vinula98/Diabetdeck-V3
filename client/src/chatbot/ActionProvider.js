@@ -13,6 +13,18 @@ class ActionProvider {
      this.stateRef = stateRef;
      this.createCustomMessage = createCustomMessage;
    }
+
+   greet = () => {
+    const message = this.createChatBotMessage("Hello Friend")
+    this.addMessageToState(message);
+   }
+
+   addMessageToState = (message) => {
+    this.setState(prevState => ({
+      ...prevState,
+      message: [...prevState.messages, message],
+    }));
+   };
  }
  
  export default ActionProvider;

@@ -10,6 +10,9 @@ from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LinearRegression, LogisticRegression
 from sklearn.metrics import accuracy_score, confusion_matrix
+import pickle
+import requests
+import json
 
 # Reading the train.csv by removing the last column since it's an empty column
 DATA_PATH = "D:/Final Year Project/Diabetdeck-V3/flask-server/dataset/Training.csv"
@@ -60,29 +63,33 @@ for model_name in models:
 svm_model = SVC()
 svm_model.fit(X_training_data, y_training_data)
 preds = svm_model.predict(X_testing_data)
-
-# Training and testing Linear Regression
-# lr_model = LinearRegression()
-# lr_model.fit(X_training_data, y_training_data)
-# preds = lr_model.predict(X_testing_data)
+# pickle.dump(svm_model, open('model.pkl','wb'))
 
 lr_model = LogisticRegression(C=0.1, penalty='l2', solver='liblinear')
 lr_model.fit(X_training_data, y_training_data)
 lr_model.score(X_training_data, y_training_data)
 preds = lr_model.predict(X_testing_data)
+# pickle.dump(lr_model, open('model.pkl','wb'))
  
 # Training and testing Random Forest Classifier
 rf_model = RandomForestClassifier(random_state=18)
 rf_model.fit(X_training_data, y_training_data)
 preds = rf_model.predict(X_testing_data)
+# pickle.dump(rf_model, open('model.pkl','wb'))
 
 # Training the models on whole data
 final_svm_model = SVC()
 final_lr_model = LogisticRegression()
 final_rf_model = RandomForestClassifier(random_state=18)
 final_svm_model.fit(X, y)
+pickle.dump(final_svm_model, open('D:/Final Year Project/Diabetdeck-V3/flask-server/Model/save/svm/finalsvmmodel.h5', 'wb'))
+# final_svm_model.save('D:/Final Year Project/Diabetdeck-V3/flask-server/Model/save/svm')
 final_lr_model.fit(X, y)
+pickle.dump(final_lr_model, open('D:/Final Year Project/Diabetdeck-V3/flask-server/Model/save/lr/finallrmodel.h5', 'wb'))
+# final_lr_model.save('D:/Final Year Project/Diabetdeck-V3/flask-server/Model/save/lr')
 final_rf_model.fit(X, y)
+pickle.dump(final_rf_model, open('D:/Final Year Project/Diabetdeck-V3/flask-server/Model/save/rf/finalrfmodel.h5', 'wb'))
+# final_rf_model.save('D:/Final Year Project/Diabetdeck-V3/flask-server/Model/save/rf')
  
 # Reading the test data
 test_data = pd.read_csv("D:/Final Year Project/Diabetdeck-V3/flask-server/dataset/Testing.csv").dropna(axis=1)
@@ -110,6 +117,7 @@ data_dict = {
     "symptom_index":symptom_index,
     "predictions_classes":encoder.classes_
 }
+pickle.dump(data_dict, open('D:/Final Year Project/Diabetdeck-V3/flask-server/Model/save/data_dictionary/datadictionary.h5', 'wb'))
  
 # Defining the Function
 # Input: string containing symptoms separated by commmas
@@ -148,5 +156,5 @@ def predictDisease(symptoms):
         return ("You do not have Diabetes")
  
 # Testing the function
-print(predictDisease("Itching,Skin Rash,Nodal Skin Eruptions"))
-# print(predictDisease("Polyuria,Increased Appetite,Excessive Hunger"))
+# print(predictDisease("Itching,Skin Rash,Nodal Skin Eruptions"))
+print(predictDisease("Polyuria,Increased Appetite,Excessive Hunger"))
