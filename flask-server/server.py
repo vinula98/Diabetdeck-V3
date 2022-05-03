@@ -1,18 +1,28 @@
-import imp
-from flask import Flask
+# from flask import Flask, request
+from urllib import response
+from flask import Flask, request
+from flask_cors import CORS, cross_origin
 from Model.predictor import predictDisease
-import pickle
-
 
 app = Flask(__name__)
+CORS(app)
 
 # Members API Route
-@app.route("/members")
+@app.route("/members", methods = ["POST"])
+@cross_origin(origin='localhost')
 def members():
-    symptomInput ="Polyuria,Increased Appetite,Excessive Hunger"
-    final_prediction = predictDisease(symptomInput)
+    JsonReq = request.json
+    JsonText = JsonReq['symptomData']
 
-    return print(final_prediction)
+    response = predictDisease(JsonText)
+
+    return {"data": response}
+
+    # final_response = request.json 
+    # symptomInput ="Polyuria,Increased Appetite,Excessive Hunger"
+    # final_prediction = predictDisease(final_response)
+
+    # return {"symptoms" : final_prediction}
 
 # # Model Output
 # @app.route("/prediction")
