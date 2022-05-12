@@ -6,9 +6,8 @@ from scipy.stats import mode
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.svm import SVC
-# from sklearn.naive_bayes import GaussianNB
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.linear_model import LinearRegression, LogisticRegression
+from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, confusion_matrix
 import pickle
 import requests
@@ -46,10 +45,8 @@ def cv_scoring(estimator, X, y):
 # Initializing Models
 models = {
     "SVC":SVC(),
-    # "Gaussian NB":GaussianNB(),
     "Logistic Regression":LogisticRegression(),
     "Random Forest":RandomForestClassifier(random_state=18)
-    # "Linear Regression" :LinearRegression()
 }
  
 # Producing cross validation score for the models
@@ -83,13 +80,10 @@ final_lr_model = LogisticRegression()
 final_rf_model = RandomForestClassifier(random_state=18)
 final_svm_model.fit(X, y)
 pickle.dump(final_svm_model, open('D:/Final Year Project/Diabetdeck-V3/flask-server/Model/save/svm/finalsvmmodel.h5', 'wb'))
-# final_svm_model.save('D:/Final Year Project/Diabetdeck-V3/flask-server/Model/save/svm')
 final_lr_model.fit(X, y)
 pickle.dump(final_lr_model, open('D:/Final Year Project/Diabetdeck-V3/flask-server/Model/save/lr/finallrmodel.h5', 'wb'))
-# final_lr_model.save('D:/Final Year Project/Diabetdeck-V3/flask-server/Model/save/lr')
 final_rf_model.fit(X, y)
 pickle.dump(final_rf_model, open('D:/Final Year Project/Diabetdeck-V3/flask-server/Model/save/rf/finalrfmodel.h5', 'wb'))
-# final_rf_model.save('D:/Final Year Project/Diabetdeck-V3/flask-server/Model/save/rf')
  
 # Reading the test data
 test_data = pd.read_csv("D:/Final Year Project/Diabetdeck-V3/flask-server/dataset/Testing.csv").dropna(axis=1)
