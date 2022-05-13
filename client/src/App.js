@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./Chatbot.css";
+import DiabetesDay from "./components/images/DiabetesDay.jpg";
+import DiabetdeckLogo from "./components/images/DiabetdeckLogo.png";
+import DiabetesFacts from "./components/images/DiabetesFacts.png";
+import Chatbot from "./components/images/Chatbot.png";
+import User from "./components/images/User.png";
+import Send from "./components/images/Send.png";
 
 function App(props) {
   const [symptomData, setSymptomData] = useState("");
@@ -30,124 +36,143 @@ function App(props) {
     setfinalDataState([...finalDataState, {id: "2", message: json.data, type: "sentMessage"}])
   }
 
+  // Funtion to refresh page
+  function refreshPage(){
+    window.location.reload();
+} 
+
   return (
     <div className="App">
-      <div className="container">
-        <div className="message-header">
-          <div className="message-header-image">
-            {/* <img src=""/> */}
-            <i class="fa fa-android" aria-hidden="true"></i>
-          </div>
-          <div className="active">
-            <h4>Diabetdeck</h4>
-            <h6>Online Now</h6>
-          </div>
-          <div className="header-icons">
-            <i class="fa fa-refresh" aria-hidden="true"></i>
-          </div>
+      <nav className="navbar navbar-expand-sm main-navigation">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"><img src={DiabetdeckLogo} /></a>
         </div>
+      </nav>
 
-        <div className="chat-page">
-          <div className="message-inbox">
-            <div className="chats">
-              <div className="message-page">
-                {finalDataState.map ((data, index) => {
-                  return (data.type === "sentMessage" ?
-                  <div className="recieved-chat">
-                  <div className="recieved-chat-image">
-                    <i class="fa fa-android" aria-hidden="true"></i>
+      <div className="container-fluid">
+        <div className="row content">
+          <div className="col-md-4">
+            <div className="symptoms-box">
+              <h3>Here are the Type 1 Diabetes Symptoms</h3>
+              <div className="symptoms-list">
+                <p>1. Polyuria</p>
+                <p>2. Increased Appetite</p>
+                <p>3. Excessive Hunger</p>
+                <p>4. Obesity</p>
+                <p>5. Blurred And Distorted Vision</p>
+                <p>6. Irregualr Sugar Level</p>
+                <p>7. Lethargy</p>
+                <p>8. Restlessness</p>
+                <p>9. Weight Loss</p>
+                <p>10. Fatigue</p>
+              </div>
+            </div>
+
+            <div className="diabetes-facts-box">
+              <img className="diabetes-facts" src={DiabetesFacts} />
+            </div>
+          </div>
+
+          <div className="col-md-5">
+            <div className="main-chatbot">
+              <div className="message-header">
+                <div className="row">
+                  <div className="col-sm-1">
+                    <div className="message-header-image">
+                      <img className="chatbot-image" src={Chatbot} />
+                      {/* <i class="fa fa-android" aria-hidden="true"></i> */}
+                    </div>
                   </div>
-                  <div className="bot-message">
-                    <div className="bot-message-inbox">
-                      <p>{data.message}</p>
+                  <div className="col-sm-3">
+                    <div className="active">
+                      <h4>Diabetdeck</h4>
+                      <h6>Online Now</h6>
+                    </div>
+                  </div>
+                  <div className="col-sm-6">
+
+                  </div>
+                  <div className="col-sm-2">
+                    <div className="header-icons">
+                      <button className="refresh-button" type="submit" onClick={refreshPage}>
+                        <i class="fa fa-refresh" aria-hidden="true"></i>
+                      </button>
                     </div>
                   </div>
                 </div>
+              </div>
 
-                :
-                
-                <div className="user-chat">
-                  <div className="user-message">
-                    <p>{data.message}</p>
-                  </div>
-                  <div className="user-chat-image">
-                    <i class="fa fa-android" aria-hidden="true"></i>
-                  </div>
-                </div>
-                  )
-                })}
-                
+              <div className="chat-page">
+                <div className="message-inbox">
+                  <div className="chats">
+                    <div className="message-page">
+                      {finalDataState.map ((data, index) => {
+                        return (data.type === "sentMessage" ?
+                        <div className="recieved-chat">
+                        <div className="recieved-chat-image">
+                          <img className="recieved-chatbot-image" src={Chatbot} />
+                          {/* <i class="fa fa-android" aria-hidden="true"></i> */}
+                        </div>
+                        <div className="bot-message">
+                          <div className="bot-message-inbox">
+                            <p>{data.message}</p>
+                          </div>
+                        </div>
+                      </div>
 
-                {/* {typedData && 
-                
-                } */}
-
-                {/* {symptomResponse &&
-                <div className="recieved-chat">
-                  <div className="recieved-chat-image">
-                    <i class="fa fa-android" aria-hidden="true"></i>
-                  </div>
-                  <div className="bot-message">
-                    <div className="bot-message-inbox">
-                      <p>{symptomResponse}</p>
+                      :
+                      
+                      <div className="user-chat">
+                        <div className="user-message">
+                          <p>{data.message}</p>
+                        </div>
+                        <div className="user-chat-image">
+                          <img className="user-image" src={User} />
+                          {/* <i class="fa fa-android" aria-hidden="true"></i> */}
+                        </div>
+                      </div>
+                        )
+                      })}
+                      
                     </div>
                   </div>
                 </div>
-                } */}
-                
+              </div>
+
+              <div className="chatbot-footer">
+                <form onSubmit={(e) => getSymptomResponse(e)}>
+                  <div className="input-group">
+                    <input 
+                      type='text' 
+                      onChange={(e) => setSymptomData(e.target.value)} 
+                      value={symptomData} 
+                      className='form-control'
+                      placeholder="Type here.."
+                    />
+                    <div className="input-group-append">
+                      <span className="input-group-text">
+                        <button className="send-button" type="submit">
+                          <img className="send-button-image" src={Send} />
+                          {/* <i className="fa fa-paper-plane"></i> */}
+                        </button>
+                      </span>
+                    </div>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* <div className="chatbot-footer">
-          <div className="input-group">
-            
-          </div>
-          <input 
-            type='text' 
-            onChange={(e) => setSymptomData(e.target.value)} 
-            value={symptomData} 
-            className='form-control'
-            placeholder="Type here.."
-          />
-        </div> */}
-
-        <div className="chatbot-footer">
-          {/* <div className="footer-icons">
-
-          </div> */}
-          <form onSubmit={(e) => getSymptomResponse(e)}>
-            <div className="input-group">
-              <input 
-                type='text' 
-                onChange={(e) => setSymptomData(e.target.value)} 
-                value={symptomData} 
-                className='form-control'
-                placeholder="Type here.."
-              />
-              <div className="input-group-append">
-                <span className="input-group-text">
-                  <button type="submit"><i className="fa fa-paper-plane"></i></button>
-                </span>
-              </div>
+          <div className="col-md-3">
+            <div className="diabetes-news">
+              <img className="diabetes-day" src={DiabetesDay}/>
             </div>
-          </form>
+          </div>
         </div>
-        
-        {/* <div>
-          Response : {symptomResponse}
-            <form onSubmit={(e) => getSymptomResponse(e)}>
-                <input 
-                  type='text' 
-                  onChange={(e) => setSymptomData(e.target.value)} 
-                  value={symptomData} 
-                  className='form-control'
-                />
-                  <button type='submit'>submit</button>
-            </form>
-        </div>  */}
       </div>
+      <footer class="container-fluid">
+        <p className="footer-text">Copyright © 2022 Diabetdeck. - All rights reserved.</p>
+      </footer>
     </div>
   );
 }

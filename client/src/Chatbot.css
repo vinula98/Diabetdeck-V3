@@ -13,11 +13,17 @@ img {
 
 .message-header {
     border: 1px solid #ccc;
+    border-radius: 10px 10px 0 0;
     width: 100%;
     height: 10%;
     border-bottom: none;
     display: inline-block;
-    background-color: #007bff;
+    /* background-color: #007bff; */
+    /* background-color: #535dfc; */
+    background-color: #1972F5;
+    margin-top: 40px;
+    padding-top: 11px;
+    padding-bottom: 11px;
 }
 
 /* .message-header-image {
@@ -26,7 +32,7 @@ img {
 
 .active {
     width: 120px;
-    float: left;
+    /* float: left; */
     margin-bottom: 10px;
 }
 
@@ -44,9 +50,10 @@ img {
 }
 
 .header-icons {
-    width: 120px;
+    width: 60px;
+    /* margin-left: 55px; */
     float: right;
-    /* margin-top: 12px; */
+    margin-top: 10px;
     /* margin-right: 10px; */
 }
 
@@ -58,6 +65,7 @@ img {
     border: 1px solid #ccc;
     overflow: hidden;
     padding-bottom: 30px;
+    background-color: #F5F8FB;
 }
 
 .chats {
@@ -73,6 +81,10 @@ img {
     display: inline-block;
     width: 20px;
     float: left;
+}
+
+.recieved-chatbot-image {
+    border-radius: 50%;
 }
 
 /* .recieved-chat {
@@ -91,13 +103,16 @@ img {
 }
 
 .bot-message-inbox p {
-    background: #efefef none repeat scroll 0 0;
+    /* background: #efefef none repeat scroll 0 0; */
+    background: #FFFFFF none repeat scroll 0 0;
     border-radius: 10px;
-    color: #646464;
+    /* color: #646464; */
+    color: #000000;
     font-size: 14px;
     margin: 0;
     padding: 5px 10px 5px 12px;
     width: 100%;
+    box-shadow: 0 3px 4px 0 rgba(87,116,151,.1)!important;
 }
 
 .user-chat {
@@ -106,19 +121,21 @@ img {
 }
 
 .user-message p {
-    background: #007bff none repeat scroll 0 0;
+    /* background: #007bff none repeat scroll 0 0; */
+    background: #1972F5 none repeat scroll 0 0;
     color: #fff;
     border-radius: 10px;
     font-size: 14px;
     margin: 0;
     padding: 5px 10px 5px 12px;
     width: 100%;
+    box-shadow: 0 3px 4px 0 rgba(87,116,151,.1)!important;
 }
 
 .user-message {
     float: left;
     width: 46%;
-    margin-left: 45%;
+    margin-left: 49%;
 }
 
 .user-chat-image {
@@ -129,11 +146,15 @@ img {
 
 .chatbot-footer {
     position: relative;
-    height: 10%;
-    background-color: #007bff;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    /* height: 10%; */
+    /* background-color: #1972F5; */
+    background-color: #FFFFFF;
+    padding-top: 12px;
+    padding-bottom: 12px;
     margin-top: -50px;
+    border-radius: 0 0 10px 10px;
+    border: 1px solid #ccc;
+    border-top-color: #1972F5 !important;
 }
 
 .input-group {
@@ -152,7 +173,7 @@ img {
 } */
 
 .form-control {
-    border: none !important;
+    border: 1px solid #1972F5 !important;
     border-radius: 20px !important;
 }
 
@@ -162,7 +183,8 @@ img {
 }
 
 .input-group .fa {
-    color: #007bff;
+    /* color: #007bff; */
+    color: #535dfc;
     float: right;
 }
 
@@ -173,13 +195,120 @@ img {
     margin-left: 22px;
 }
 
-.footer-icons .fa {
-    color: #fff;
-    padding: 5px;
-}
-
 .form-control:focus {
     border-color: none !important;
     box-shadow: none !important;
     border-radius: 20px;
 }
+
+.row.content {height: 779px}
+
+footer {
+    /* background-color: #555; */
+    color: white;
+    padding: 15px;
+    background-color: #B0D5FF;
+}
+
+.symptoms-box {
+    margin-top: 40px;
+    /* border-style: solid; */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 5px 5px 5px 5px;
+    /* box-shadow: 5px 10px; */
+    box-shadow: 0 8px 9px 0 rgba(87,116,151,.1)!important;
+}
+
+.symptoms-list {
+    font-weight: bold;
+}
+
+.diabetes-news {
+    /* border-style: solid; */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-top: 40px;
+    box-shadow: 0 8px 9px 0 rgba(87,116,151,.1)!important;
+}
+
+.diabetes-day {
+    height: 44.2rem;
+    border-radius: 10px;
+    box-shadow: 0 8px 9px 0 rgba(87,116,151,.1)!important;
+}
+
+body {
+    background-image: url(./components/images/WebsiteBackground.jpg);
+}
+
+/* .main-navigation {
+    color: #535dfc;
+} */
+
+.navbar {
+    background-color: #B0D5FF;
+    height: 80px;
+}
+
+.footer-text {
+    text-align: center;
+    color: #000000;
+}
+
+.diabetes-facts-box {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 8px 9px 0 rgba(87,116,151,.1)!important;
+    margin-top: 5px;
+}
+
+.diabetes-facts {
+    border-radius: 10px;
+    box-shadow: 0 8px 9px 0 rgba(87,116,151,.1)!important;
+    height: 20rem;
+    height: 15.8rem;
+    width: 40rem;
+}
+
+.chatbot-image {
+    height: 2.5rem;
+    margin-left: 20px;
+    border-radius: 50%;
+}
+
+.send-button {
+    border: none !important;
+    background: white;
+}
+
+.send-button-image {
+    width: 25px;
+}
+
+.refresh-button {
+    border: none !important;
+    background: none;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #535dfc; 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #535dfc; 
+  }
