@@ -6,6 +6,9 @@ import DiabetesFacts from "./components/images/DiabetesFacts.png";
 import Chatbot from "./components/images/Chatbot.png";
 import User from "./components/images/User.png";
 import Send from "./components/images/Send.png";
+import Types from "./components/images/Types.jpg";
+import Symptoms from "./components/images/Symptoms.jpg";
+import Managing from "./components/images/Managing.jpg";
 
 function App(props) {
   const [symptomData, setSymptomData] = useState("");
@@ -40,6 +43,22 @@ function App(props) {
   function refreshPage(){
     window.location.reload();
 } 
+
+//Slideshow
+var myIndex = 0;
+carousel();
+
+function carousel() {
+  var i;
+  var x = document.getElementsByClassName("diabetes-day");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  myIndex++;
+  if (myIndex > x.length) {myIndex = 1}    
+  x[myIndex-1].style.display = "block";  
+  setTimeout(carousel, 5000); // Change image every 5 seconds
+}
 
   return (
     <div className="App">
@@ -164,8 +183,22 @@ function App(props) {
           </div>
 
           <div className="col-md-3">
-            <div className="diabetes-news">
-              <img className="diabetes-day" src={DiabetesDay}/>
+            <div className="slideshow-container">
+              <div className="diabetes-news">
+                <img className="diabetes-day" src={DiabetesDay}/>
+                <img className="diabetes-day" src={Symptoms}/>
+                <img className="diabetes-day" src={Managing}/>
+              </div>
+              {/* <div className="diabetes-news">
+                <img className="diabetes-day" src={Symptoms}/>
+              </div>
+              <div className="diabetes-news">
+                <img className="diabetes-day" src={Managing}/>
+              </div> */}
+            </div>
+            
+            <div className="diabetes-types-box">
+              <img className="diabetes-types-image" src={Types} />
             </div>
           </div>
         </div>
