@@ -15,6 +15,7 @@ function App(props) {
   const [symptomResponse, setSymptomResponse] = useState("");
   const [typedData, setTypedData] = useState("");
   const [finalDataState, setfinalDataState] = useState([{id:1, type:"sentMessage", message:"Hi! I'm Diabetdeck. In order to assist you please enter 3 symptoms you have out of the common Type 1 Diabetes symptoms shown in the screen."}]);
+  const [imageIndex, setImageIndex] = useState(0);
 
   console.log(finalDataState)
   const getSymptomResponse = async (e) => {
@@ -39,25 +40,29 @@ function App(props) {
     setfinalDataState([...finalDataState, {id: "2", message: json.data, type: "sentMessage"}])
   }
 
+  const imagesSrc = [
+    DiabetesDay,
+    Symptoms,
+    Managing
+  ];
+
+  // Slideshow Function
+  const carousel = () => {
+    setImageIndex((prev) => (prev < 2 ? prev + 1 : 0));
+  };
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      carousel();
+    }, 2000); // set the which timer you want
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
   // Funtion to refresh page
   function refreshPage(){
     window.location.reload();
-} 
-
-//Slideshow
-var myIndex = 0;
-carousel();
-
-function carousel() {
-  var i;
-  var x = document.getElementsByClassName("diabetes-day");
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";  
-  }
-  myIndex++;
-  if (myIndex > x.length) {myIndex = 1}    
-  x[myIndex-1].style.display = "block";  
-  setTimeout(carousel, 5000); // Change image every 5 seconds
 }
 
   return (
@@ -79,7 +84,7 @@ function carousel() {
                 <p>3. Excessive Hunger</p>
                 <p>4. Obesity</p>
                 <p>5. Blurred And Distorted Vision</p>
-                <p>6. Irregualr Sugar Level</p>
+                <p>6. Irregular Sugar Level</p>
                 <p>7. Lethargy</p>
                 <p>8. Restlessness</p>
                 <p>9. Weight Loss</p>
@@ -99,7 +104,6 @@ function carousel() {
                   <div className="col-sm-1">
                     <div className="message-header-image">
                       <img className="chatbot-image" src={Chatbot} />
-                      {/* <i class="fa fa-android" aria-hidden="true"></i> */}
                     </div>
                   </div>
                   <div className="col-sm-3">
@@ -185,16 +189,8 @@ function carousel() {
           <div className="col-md-3">
             <div className="slideshow-container">
               <div className="diabetes-news">
-                <img className="diabetes-day" src={DiabetesDay}/>
-                <img className="diabetes-day" src={Symptoms}/>
-                <img className="diabetes-day" src={Managing}/>
+                <img className="diabetes-day" src={imagesSrc[imageIndex]} alt="" />
               </div>
-              {/* <div className="diabetes-news">
-                <img className="diabetes-day" src={Symptoms}/>
-              </div>
-              <div className="diabetes-news">
-                <img className="diabetes-day" src={Managing}/>
-              </div> */}
             </div>
             
             <div className="diabetes-types-box">

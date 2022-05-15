@@ -36,11 +36,11 @@ def predictDisease(symptoms):
     }
     if final_prediction == 'Diabetes ':
         # return final_prediction
-        return ("You have Type 1 Diabetes")
+        return ("You have Type 1 Diabetes. Diabetdeck strongly recommends that you visit your family doctor or an Endocrinologist.")
     else:
         # print("Not Diabetes")
         # return final_prediction
-        return ("You do not have Diabetes")
+        return ("You do not have Diabetes. But if you have any other symptoms, Diabetdeck would strongly recommend that you visit a doctor as those symptoms could be of another disease.")
  
 # Testing the function
 # print(predictDisease("Itching,Skin Rash,Nodal Skin Eruptions"))

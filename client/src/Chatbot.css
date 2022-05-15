@@ -200,8 +200,6 @@ footer {
 }
 
 .diabetes-day {
-    /* height: 44.2rem; */
-    display: none;
     border-radius: 10px;
     box-shadow: 0 8px 9px 0 rgba(87,116,151,.1)!important;
 }
@@ -289,12 +287,3 @@ body {
   ::-webkit-scrollbar-thumb:hover {
     background: #535dfc; 
   }
-
-  /* slideshow */
-  /* [data-component="slideshow"] .diabetes-news {
-    display: none;
-  }
-
-  [data-component="slideshow"] .diabetes-news.active {
-    display: block;
-  } */
