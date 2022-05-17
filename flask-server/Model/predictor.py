@@ -23,23 +23,15 @@ def predictDisease(symptoms):
      
     # generating individual outputs
     rf_prediction = data_dict["predictions_classes"][final_rf_model.predict(input_data)[0]]
-    lr_prediction = data_dict["predictions_classes"][final_lr_model.predict(input_data)[0]]
-    svm_prediction = data_dict["predictions_classes"][final_svm_model.predict(input_data)[0]]
      
-    # making final prediction by taking mode of all predictions
-    final_prediction = mode([rf_prediction, lr_prediction, svm_prediction])[0][0]
+    # making final prediction by taking Radom Forest model
+    final_prediction = mode([rf_prediction])[0][0]
     predictions = {
         "rf_model_prediction": rf_prediction,
-        "lr_model_prediction": lr_prediction,
-        "svm_model_prediction": svm_prediction,
-        "final_prediction":final_prediction
     }
     if final_prediction == 'Diabetes ':
-        # return final_prediction
         return ("You have Type 1 Diabetes. Diabetdeck strongly recommends that you visit your family doctor or an Endocrinologist.")
     else:
-        # print("Not Diabetes")
-        # return final_prediction
         return ("You do not have Diabetes. But if you have any other symptoms, Diabetdeck would strongly recommend that you visit a doctor as those symptoms could be of another disease.")
  
 # Testing the function

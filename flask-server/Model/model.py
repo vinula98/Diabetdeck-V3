@@ -12,6 +12,7 @@ from sklearn.metrics import accuracy_score, confusion_matrix
 import pickle
 import requests
 import json
+import seaborn as sns
 
 # Reading the train.csv by removing the last column since it's an empty column
 DATA_PATH = "D:/Final Year Project/Diabetdeck-V3/flask-server/dataset/Training.csv"
@@ -23,11 +24,6 @@ temp_df = pd.DataFrame({
     "Disease": disease_counts.index,
     "Counts": disease_counts.values
 })
- 
-# plt.figure(figsize = (18,8))
-# sns.barplot(x = "Disease", y = "Counts", data = temp_df)
-# plt.xticks(rotation=90)
-# plt.show()
 
 # Encoding the target value into numerical value using LabelEncoder
 encoder = LabelEncoder()
@@ -36,7 +32,7 @@ data["prognosis"] = encoder.fit_transform(data["prognosis"])
 X = data.iloc[:,:-1]
 y = data.iloc[:, -1]
 X_training_data, X_testing_data, y_training_data, y_testing_data =train_test_split(
-  X, y, test_size = 0.2, random_state = 24)
+  X, y, test_size = 0.8, random_state = 24)
 
 # Defining scoring metric for k-fold cross validation
 def cv_scoring(estimator, X, y):
@@ -61,18 +57,28 @@ svm_model = SVC()
 svm_model.fit(X_training_data, y_training_data)
 preds = svm_model.predict(X_testing_data)
 # pickle.dump(svm_model, open('model.pkl','wb'))
+ 
+print(f"Accuracy of SVM Classifier\
+: {accuracy_score(y_testing_data, preds)*100}")
 
+# Training and testing Logistic Regression
 lr_model = LogisticRegression(C=0.1, penalty='l2', solver='liblinear')
 lr_model.fit(X_training_data, y_training_data)
 lr_model.score(X_training_data, y_training_data)
 preds = lr_model.predict(X_testing_data)
 # pickle.dump(lr_model, open('model.pkl','wb'))
  
+print(f"Accuracy of Logistic Regression\
+: {accuracy_score(y_testing_data, preds)*100}")
+ 
 # Training and testing Random Forest Classifier
 rf_model = RandomForestClassifier(random_state=18)
 rf_model.fit(X_training_data, y_training_data)
 preds = rf_model.predict(X_testing_data)
 # pickle.dump(rf_model, open('model.pkl','wb'))
+ 
+print(f"Accuracy of Forest Classifier\
+: {accuracy_score(y_testing_data, preds)*100}")
 
 # Training the models on whole data
 final_svm_model = SVC()
@@ -130,25 +136,17 @@ def predictDisease(symptoms):
      
     # generating individual outputs
     rf_prediction = data_dict["predictions_classes"][final_rf_model.predict(input_data)[0]]
-    lr_prediction = data_dict["predictions_classes"][final_lr_model.predict(input_data)[0]]
-    svm_prediction = data_dict["predictions_classes"][final_svm_model.predict(input_data)[0]]
      
     # making final prediction by taking mode of all predictions
-    final_prediction = mode([rf_prediction, lr_prediction, svm_prediction])[0][0]
+    final_prediction = mode([rf_prediction])[0][0]
     predictions = {
         "rf_model_prediction": rf_prediction,
-        "lr_model_prediction": lr_prediction,
-        "svm_model_prediction": svm_prediction,
-        "final_prediction":final_prediction
     }
     if final_prediction == 'Diabetes ':
-        # return final_prediction
         return ("You have Type 1 Diabetes. Diabetdeck strongly recommends that you visit your family doctor or an Endocrinologist.")
     else:
-        # print("Not Diabetes")
-        # return final_prediction
         return ("You do not have Diabetes. But if you have any other symptoms, Diabetdeck would strongly recommend that you visit a doctor as those symptoms could be of another disease.")
  
 # Testing the function
-# print(predictDisease("Itching,Skin Rash,Nodal Skin Eruptions"))
-print(predictDisease("Polyuria,Increased Appetite,Excessive Hunger"))
+print(predictDisease("Itching,Skin Rash,Nodal Skin Eruptions"))
+# print(predictDisease("Polyuria,Increased Appetite,Excessive Hunger"))
