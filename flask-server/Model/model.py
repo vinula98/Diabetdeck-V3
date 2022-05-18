@@ -8,10 +8,11 @@ from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score, confusion_matrix
+from sklearn.metrics import accuracy_score, confusion_matrix, f1_score, precision_score, recall_score
 import pickle
 import requests
 import json
+import seaborn as sns
 
 # Reading the train.csv by removing the last column since it's an empty column
 DATA_PATH = "D:/Final Year Project/Diabetdeck-V3/flask-server/dataset/Training.csv"
@@ -60,6 +61,18 @@ preds = svm_model.predict(X_testing_data)
 print(f"Accuracy of SVM Classifier\
 : {accuracy_score(y_testing_data, preds)*100}")
 
+cf_matrix = confusion_matrix(y_testing_data, preds)
+plt.figure(figsize=(12,8))
+sns.heatmap(cf_matrix, annot=True)
+plt.title("Confusion Matrix for SVM Classifier on Test Data")
+plt.show()
+
+print("Precision Score : ", precision_score(y_testing_data, preds, average='macro'))
+
+print("Recall Score : ", recall_score(y_testing_data, preds, average='macro'))
+
+print("F1 Score : ", f1_score(y_testing_data, preds, average='macro'))
+
 # Training and testing Logistic Regression
 lr_model = LogisticRegression(C=0.1, penalty='l2', solver='liblinear')
 lr_model.fit(X_training_data, y_training_data)
@@ -69,6 +82,18 @@ preds = lr_model.predict(X_testing_data)
  
 print(f"Accuracy of Logistic Regression\
 : {accuracy_score(y_testing_data, preds)*100}")
+
+cf_matrix = confusion_matrix(y_testing_data, preds)
+plt.figure(figsize=(12,8))
+sns.heatmap(cf_matrix, annot=True)
+plt.title("Confusion Matrix for Logistic Regression on Test Data")
+plt.show()
+
+print("Precision Score : ", precision_score(y_testing_data, preds, average='macro'))
+
+print("Recall Score : ", recall_score(y_testing_data, preds, average='macro'))
+
+print("F1 Score : ", f1_score(y_testing_data, preds, average='macro'))
  
 # Training and testing Random Forest Classifier
 rf_model = RandomForestClassifier(random_state=18)
@@ -76,8 +101,20 @@ rf_model.fit(X_training_data, y_training_data)
 preds = rf_model.predict(X_testing_data)
 # pickle.dump(rf_model, open('model.pkl','wb'))
  
-print(f"Accuracy of Forest Classifier\
+print(f"Accuracy of Random Forest Classifier\
 : {accuracy_score(y_testing_data, preds)*100}")
+
+cf_matrix = confusion_matrix(y_testing_data, preds)
+plt.figure(figsize=(12,8))
+sns.heatmap(cf_matrix, annot=True)
+plt.title("Confusion Matrix for SVM Classifier on Test Data")
+plt.show()
+
+print("Precision Score : ", precision_score(y_testing_data, preds, average='macro'))
+
+print("Recall Score : ", recall_score(y_testing_data, preds, average='macro'))
+
+print("F1 Score : ", f1_score(y_testing_data, preds, average='macro'))
 
 # Training the models on whole data
 final_svm_model = SVC()

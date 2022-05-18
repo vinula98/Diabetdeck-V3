@@ -26,7 +26,7 @@ function App(props) {
     // console.log(setSymptomData)
     finalDataState.push( {id: "2", message: symptomData, type: "dataType"})
     console.log(symptomData)
-    const response = await fetch("http://localhost:5000/members", {
+    const response = await fetch("http://localhost:5000/predict", {
       method:'POST',
       headers:{'Accept': 'application/json', 'Content-Type': 'application/json'},
       body: JSON.stringify({
