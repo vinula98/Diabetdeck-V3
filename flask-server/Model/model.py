@@ -12,7 +12,6 @@ from sklearn.metrics import accuracy_score, confusion_matrix
 import pickle
 import requests
 import json
-import seaborn as sns
 
 # Reading the train.csv by removing the last column since it's an empty column
 DATA_PATH = "D:/Final Year Project/Diabetdeck-V3/flask-server/dataset/Training.csv"
@@ -119,9 +118,7 @@ data_dict = {
 }
 pickle.dump(data_dict, open('D:/Final Year Project/Diabetdeck-V3/flask-server/Model/save/data_dictionary/datadictionary.h5', 'wb'))
  
-# Defining the Function
-# Input: string containing symptoms separated by commmas
-# Output: Generated predictions by models
+# Function for final prediction
 def predictDisease(symptoms):
     symptoms = symptoms.split(",")
      
