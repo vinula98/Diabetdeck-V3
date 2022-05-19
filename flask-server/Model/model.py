@@ -132,14 +132,6 @@ test_data = pd.read_csv("D:/Final Year Project/Diabetdeck-V3/flask-server/datase
  
 test_X = test_data.iloc[:, :-1]
 test_Y = encoder.transform(test_data.iloc[:, -1])
- 
-# Making prediction by take mode of predictions made by all the classifiers
-svm_preds = final_svm_model.predict(test_X)
-lr_preds = final_lr_model.predict(test_X)
-rf_preds = final_rf_model.predict(test_X)
- 
-final_preds = [mode([i,j,k])[0][0] for i,j,
-               k in zip(svm_preds, lr_preds, rf_preds)]
 
 symptoms = X.columns.values
  
