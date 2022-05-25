@@ -53,6 +53,10 @@ for model_name in models:
                              n_jobs = -1,
                              scoring = cv_scoring)
 
+    # print(model_name)
+    # print(f"Scores: {scores}")
+    # print(f"Mean Score: {np.mean(scores)}")
+
 # Training and testing SVM Classifier
 svm_model = SVC()
 svm_model.fit(X_training_data, y_training_data)
