@@ -29,10 +29,11 @@ temp_df = pd.DataFrame({
 encoder = LabelEncoder()
 data["prognosis"] = encoder.fit_transform(data["prognosis"])
 
+# Splitting Data
 X = data.iloc[:,:-1]
 y = data.iloc[:, -1]
 X_training_data, X_testing_data, y_training_data, y_testing_data =train_test_split(
-  X, y, test_size = 0.8, random_state = 24)
+  X, y, test_size = 0.3, random_state = 24)
 
 # Defining scoring metric for k-fold cross validation
 def cv_scoring(estimator, X, y):
@@ -116,7 +117,7 @@ print("Recall Score : ", recall_score(y_testing_data, preds, average='macro'))
 
 print("F1 Score : ", f1_score(y_testing_data, preds, average='macro'))
 
-# Training the models on whole data
+# Training the models on all training data and validating on test data
 final_svm_model = SVC()
 final_lr_model = LogisticRegression()
 final_rf_model = RandomForestClassifier(random_state=18)
