@@ -136,7 +136,7 @@ test_Y = encoder.transform(test_data.iloc[:, -1])
 
 symptoms = X.columns.values
  
-# Creating a symptom index dictionary to encode the input symptoms into numerical form
+# Creating a symptom index dictionary to convert the input symptoms into numerical form
 symptom_index = {}
 for index, value in enumerate(symptoms):
     symptom = " ".join([i.capitalize() for i in value.split("_")])
